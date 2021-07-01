@@ -1,12 +1,12 @@
 # Algoritmos y Estructura de Datos
+
 ## Proyecto sobre Grafos
---------
 
 ## Integrantes
-- 
-- 
-- 
 
+- José Miguel Sanchez Atahualpa
+- Milagros Valeria Yupanqui López
+- Julisa Lapa Romero
 ----
 
 El proyecto del curso consiste en implementar una estructura de datos de grafo y un file parser. La estructura debe soportar los métodos y algoritmos descritos a continuacion:  
