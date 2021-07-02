@@ -51,17 +51,40 @@ bool DirectedGraph<TV,TE>::createEdge(string id1, string id2, TE w) {
 
 template<typename TV, typename TE>
 bool DirectedGraph<TV,TE>::deleteVertex(string id) {
-
+    if(findById(id)) {
+        for (auto i : this->vertexes) {
+            deleteEdge(i.first, id);
+        }
+        this->vertexes.erase(id);
+        return true;
+    }
+    return false;
 }
 
 template<typename TV, typename TE>
 bool DirectedGraph<TV,TE>::deleteEdge(string id) {
-
+    if (findById(start) && findById(end) {
+        for (auto i = this->vertexes[start]->edges.begin(); i != this->vertexes[start]->edges.end();) {
+            if ((*i)->vertexes[1] == this->vertexes[end]) {
+                this->vertexes[start]->edges.erase(i++);
+                this->edges--;
+            }
+            else i++;
+        }
+        return true;
+    }
+    return false;
 }
 
 template<typename TV, typename TE>
 TE DirectedGraph<TV,TE>::operator()(string start, string end){
-
+    if(this->vertexes.count(start) == 0 || this->vertexes.count(end) == 0) {
+        return numeric_limits<TE>::min();
+    }
+    for (auto i : this->vertexes[end]){
+        return i->weight;
+    }
+    return numeric_limits<TE>::min();
 }
 
 template<typename TV, typename TE>
@@ -97,7 +120,11 @@ void DirectedGraph<TV,TE>::clear() {
 
 template<typename TV, typename TE>
 void DirectedGraph<TV,TE>::displayVertex(string id) {
-
+    cout << this->vertexes[id]->data << " :: ";
+    for (auto const& j : this->vertexes[id]->edges){
+        cout << j->vertexes[1]->data << "(" << j->weight << ") ";
+    }
+    cout << endl;
 }
 
 template<typename TV, typename TE>
@@ -110,7 +137,13 @@ bool DirectedGraph<TV,TE>::findById(string id) {
 
 template<typename TV, typename TE>
 void DirectedGraph<TV,TE>::display() {
-
+    for (auto i : this->vertexes) {
+        cout << i.second->data << " :: ";
+        for (auto j : i.second->edges) {
+            cout << j->vertexes[1]->data << "(" << j->weight << ") ";
+        }
+        cout << endl;
+    }
 }
 
 #endif
