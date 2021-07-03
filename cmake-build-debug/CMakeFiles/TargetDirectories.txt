@@ -1,0 +1,3 @@
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/cmake-build-debug/CMakeFiles/proyecto_de_curso_diosplan.dir

@@ -5,12 +5,13 @@
 
 template<typename TV, typename TE>
 class UnDirectedGraph : public Graph<TV, TE>{
+public:
     UnDirectedGraph();
     bool insertVertex(string id, TV vertex);
     bool createEdge(string id1, string id2, TE w);
     bool deleteVertex(string id);
-    bool deleteEdge(string id);
-    TE &operator()(string start, string end);
+    bool deleteEdge(string id1, string id2);
+    TE operator()(string start, string end);
     float density();
     bool isDense(float threshold = 0.5);
     bool isConnected();
@@ -23,14 +24,14 @@ class UnDirectedGraph : public Graph<TV, TE>{
 };
 
 template<typename TV, typename TE>
-UnDirectedGraph<TV,TE>::UnDirectedGraph<typename TV, typename TE>() {
+UnDirectedGraph<TV,TE>::UnDirectedGraph() {
     this->edges = 0;
 }
 
 template<typename TV, typename TE>
 bool UnDirectedGraph<TV, TE>::insertVertex(string id, TV vertex) {
     if(!findById(id)) {
-        Vertex<TV, TE> *v = new Vertex<TV, TE>(string id, TV vertex);
+        Vertex<TV, TE> *v = new Vertex<TV, TE>(vertex, id);
         this->vertexes[id] = v;
         return true;
     }
@@ -57,14 +58,41 @@ bool UnDirectedGraph<TV, TE>::createEdge(string id1, string id2, TE w) {
 
 template<typename TV, typename TE>
 bool UnDirectedGraph<TV, TE>::deleteVertex(string id) {
-
+    if(findById(id)) {
+        for (auto i : this->vertexes) {
+            deleteEdge(i.first, id);
+        }
+        this->vertexes.erase(id);
+        return true;
+    }
+    return false;
 }
-
+/////////////u.u
 template<typename TV, typename TE>
-bool UnDirectedGraph<TV, TE>::deleteEdge(string id) {
-
+bool UnDirectedGraph<TV, TE>::deleteEdge(string start, string end) {
+    if (findById(start) && findById(end)) {
+        for (auto i = this->vertexes[start]->edges.begin(); i != this->vertexes[start]->edges.end();){
+            if ((*i)->vertexes[1] == this->vertexes[end]) {
+                this->vertexes[start]->edges.erase(i++);
+                this->edges--;
+            }
+            else{
+                i++;
+            }
+        }
+        for (auto j = this->vertexes[end]->edges.begin(); j != this->vertexes[end]->edges.end();){
+            if ((*j)->vertexes[1] == this->vertexes[start]) {
+                this->vertexes[end]->edges.erase(j++);
+            }
+            else {
+                j++;
+            }
+        }
+        return true;
+    }
+    return false;
 }
-
+//////////////u.u
 template<typename TV, typename TE>
 TE UnDirectedGraph<TV, TE>::operator()(string start, string end) {
     if(this->vertexes.count(start) == 0 || this->vertexes.count(end) == 0) {
@@ -90,7 +118,7 @@ bool UnDirectedGraph<TV, TE>::isDense(float threshold) {
 
 template<typename TV, typename TE>
 bool UnDirectedGraph<TV, TE>::isConnected() {
-
+/////// por revisar
 }
 
 template<typename TV, typename TE>
@@ -106,10 +134,11 @@ void UnDirectedGraph<TV, TE>::clear() {
 
 template<typename TV, typename TE>
 void UnDirectedGraph<TV, TE>::displayVertex(string id) {
-    if(this->vertexes.find(id) == this->vertexes.end()) {
-        return false;
+    cout << this->vertexes[id]->data << " :: ";
+    for (auto const& j : this->vertexes[id]->edges) {
+        cout << j->vertexes[1]->data << "[" << j->weight << "] ";
     }
-    return true;
+    cout << endl;
 }
 
 template<typename TV, typename TE>
@@ -122,7 +151,13 @@ bool UnDirectedGraph<TV, TE>::findById(string id) {
 
 template<typename TV, typename TE>
 void UnDirectedGraph<TV, TE>::display() {
-
+    for (auto i : this->vertexes) {
+        cout << i.second->data << " :: ";
+        for (auto j : i.second->edges) {
+            cout << j->vertexes[1]->data << "[" << j->weight << "] ";
+        }
+        cout << endl;
+    }
 }
 
 #endif

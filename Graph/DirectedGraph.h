@@ -2,15 +2,18 @@
 #define NONDIRECTEDGRAPH_H
 
 #include "graph.h"
+#include <numeric>
 
+using namespace std;
 template<typename TV, typename TE>
 class DirectedGraph : public Graph<TV, TE>{
+public:
     DirectedGraph();
     bool insertVertex(string id, TV vertex);
     bool createEdge(string id1, string id2, TE w);
     bool deleteVertex(string id);
-    bool deleteEdge(string id);
-    TE &operator()(string start, string end);
+    bool deleteEdge(string id1, string id2);
+    TE operator()(string start, string end);
     float density();
     bool isDense(float threshold = 0.5);
     bool isConnected();
@@ -62,8 +65,8 @@ bool DirectedGraph<TV,TE>::deleteVertex(string id) {
 }
 
 template<typename TV, typename TE>
-bool DirectedGraph<TV,TE>::deleteEdge(string id) {
-    if (findById(start) && findById(end) {
+bool DirectedGraph<TV,TE>::deleteEdge(string start, string end) {
+    if (findById(start) && findById(end)) {
         for (auto i = this->vertexes[start]->edges.begin(); i != this->vertexes[start]->edges.end();) {
             if ((*i)->vertexes[1] == this->vertexes[end]) {
                 this->vertexes[start]->edges.erase(i++);
@@ -81,8 +84,10 @@ TE DirectedGraph<TV,TE>::operator()(string start, string end){
     if(this->vertexes.count(start) == 0 || this->vertexes.count(end) == 0) {
         return numeric_limits<TE>::min();
     }
-    for (auto i : this->vertexes[end]){
-        return i->weight;
+    for (auto i : this->vertexes[start]->edges){
+        if (i->vertexes[1] == this->vertexes[end]){
+            return  i->weight;
+        }
     }
     return numeric_limits<TE>::min();
 }
@@ -99,12 +104,12 @@ bool DirectedGraph<TV,TE>::isDense(float threshold) {
 
 template<typename TV, typename TE>
 bool DirectedGraph<TV,TE>::isConnected() {
-
+///////// pendiente
 }
 
 template<typename TV, typename TE>
 bool DirectedGraph<TV,TE>::isStronglyConnected() throw() {
-
+//////// pendiente
 }
 
 template<typename TV, typename TE>
@@ -122,7 +127,7 @@ template<typename TV, typename TE>
 void DirectedGraph<TV,TE>::displayVertex(string id) {
     cout << this->vertexes[id]->data << " :: ";
     for (auto const& j : this->vertexes[id]->edges){
-        cout << j->vertexes[1]->data << "(" << j->weight << ") ";
+        cout << j->vertexes[1]->data << "[" << j->weight << "] ";
     }
     cout << endl;
 }
@@ -140,7 +145,7 @@ void DirectedGraph<TV,TE>::display() {
     for (auto i : this->vertexes) {
         cout << i.second->data << " :: ";
         for (auto j : i.second->edges) {
-            cout << j->vertexes[1]->data << "(" << j->weight << ") ";
+            cout << j->vertexes[1]->data << "[" << j->weight << "] ";
         }
         cout << endl;
     }

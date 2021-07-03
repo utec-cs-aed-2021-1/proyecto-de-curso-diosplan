@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Parser/parser.h
+
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Tester/tester.h
+
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/main.cpp
+iostream
+-
+Tester/tester.h
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Tester/tester.h
+Parser/parser.h
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Parser/parser.h
+

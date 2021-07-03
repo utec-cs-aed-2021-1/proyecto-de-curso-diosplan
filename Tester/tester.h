@@ -5,13 +5,53 @@
 #ifndef PROYECTO_DE_CURSO_DIOSPLAN_TESTER_H
 #define PROYECTO_DE_CURSO_DIOSPLAN_TESTER_H
 
+#include "../Graph/DirectedGraph.h"
+#include "../Graph/UndirectedGraph.h"
+
+using namespace std;
 struct Tester{
     static void executeExamples();
     static void executeParser();
 };
 
 void Tester::executeExamples(){
+    cout << "------------------------------------------------" << endl;
+    cout << "|               Directed  Graph                |" << endl;
+    cout << "------------------------------------------------" << endl;
 
+    DirectedGraph<char, int> graph1;
+    graph1.insertVertex("1", 'A');
+    graph1.insertVertex("2", 'B');
+    graph1.insertVertex("3", 'C');
+    graph1.insertVertex("4", 'D');
+    graph1.insertVertex("5", 'E');
+
+    graph1.createEdge("1", "2", 10);
+    graph1.createEdge("1", "3", 5);
+    graph1.createEdge("3", "4", 15);
+    graph1.createEdge("2", "4", 20);
+    graph1.createEdge("1", "4", 12);
+    graph1.createEdge("2", "5", 25);
+    graph1.createEdge("4", "5", 30);
+
+    graph1.display();
+
+    UnDirectedGraph<char, int> graph2;
+    graph2.insertVertex("1", 'A');
+    graph2.insertVertex("2", 'B');
+    graph2.insertVertex("3", 'C');
+    graph2.insertVertex("4", 'D');
+    graph2.insertVertex("5", 'E');
+
+    graph2.createEdge("1", "2", 10);
+    graph2.createEdge("1", "3", 5);
+    graph2.createEdge("3", "4", 15);
+    graph2.createEdge("2", "4", 20);
+    graph2.createEdge("1", "4", 12);
+    graph2.createEdge("2", "5", 25);
+    graph2.createEdge("4", "5", 30);
+
+    graph2.display(); cout << endl;
 }
 
 void Tester::executeParser(){
