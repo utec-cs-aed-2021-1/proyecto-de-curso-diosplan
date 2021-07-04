@@ -46,10 +46,15 @@ struct Vertex {
 };
 
 template<typename TV, typename TE>
+struct Dijkstra;
+
+template<typename TV, typename TE>
 class Graph{
 protected:
     std::unordered_map<string, Vertex<TV, TE>*>  vertexes;
     unsigned int edges;
+
+    friend struct Dijkstra<TV, TE>;
     
 public:
     virtual bool insertVertex(string id, TV vertex, double lat = 0, double lon = 0) = 0;

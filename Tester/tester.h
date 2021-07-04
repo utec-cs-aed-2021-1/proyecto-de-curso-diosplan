@@ -6,6 +6,7 @@
 #define PROYECTO_DE_CURSO_DIOSPLAN_TESTER_H
 
 #include "../Graph/DirectedGraph.h"
+#include "../Graph/Algorithms/dijkstra.h"
 #include "../Graph/UndirectedGraph.h"
 #include "../Parser/parser.h"
 using namespace std;
@@ -97,6 +98,13 @@ void Tester::executeParser(string path){
 
     bool empty = d1graph.empty();
     if(empty) {cout << "Empty !" << endl;} else {cout << "No Empty!" << endl;}
+
+
+    cout<<"\nDijkstra:\n";
+    UnDirectedGraph<string, double> u2graph;
+    parser.uGraphMake(u2graph);
+    Dijkstra<string, double> Djks(&u2graph, "2796");
+    Djks.apply();
 }
 
 #endif //PROYECTO_DE_CURSO_DIOSPLAN_TESTER_H
