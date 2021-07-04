@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/proyecto_de_curso_diosplan.dir/main.cpp.o  -o proyecto_de_curso_diosplan 

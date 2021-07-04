@@ -36,6 +36,21 @@ void Tester::executeExamples(){
 
     graph1.display();
 
+    cout << "|              DGraph Methods               |" << endl;
+    if(graph1.isConnected()) {
+        cout << "is Connected!!" << endl;
+    } else {
+        cout << "isn't Connected!!" << endl;
+    }
+    if(graph1.isStronglyConnected()) {
+        cout << "is StronglyConnected!!" << endl;
+    } else {
+        cout << "isn't StronglyConnected!!" << endl;
+    }
+    cout << "------------------------------------------------" << endl;
+    cout << "|              Undirected  Graph               |" << endl;
+    cout << "------------------------------------------------" << endl;
+
     UnDirectedGraph<char, int> graph2;
     graph2.insertVertex("1", 'A');
     graph2.insertVertex("2", 'B');

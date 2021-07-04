@@ -57,9 +57,21 @@ UndirectedGraph<char, int> result = kruskal.apply();//return a tree
 Prim<char, int> prim(&graph, "A");
 UndirectedGraph<char, int> result = prim.apply();//return a tree
 
-//3- A *
+//3- Breadth-first Search (only for undirected graphs)
+BFS<char, int> bfs(&graph);
+UndirectedGraph<char, int> result = bfs.apply(string src); //return a tree
+
+//4- Depth-first Search(only for undirected graphs)
+DFS<char, int> dfs(&graph);
+UndirectedGraph<char, int> result = bfs.apply(string src); //return a tree
+
+//5- A *
 AStar<char, int> astar(&graph, "A", "Z", vector<int> heuristics);
 UndirectedGraph<char, int> result = astar.apply();
+
+//6- Dijkstra Algorithm
+Dijkstra<char, int>dijkstra(&graph, string src);
+djks.apply();
 
 ```
 
