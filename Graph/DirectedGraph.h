@@ -11,7 +11,7 @@ template<typename TV, typename TE>
 class DirectedGraph : public Graph<TV, TE>{
 public:
     DirectedGraph();
-    bool insertVertex(string id, TV vertex);
+    bool insertVertex(string id, TV vertex, double lat, double lon);
     bool createEdge(string id1, string id2, TE w);
     bool deleteVertex(string id);
     bool deleteEdge(string id1, string id2);
@@ -26,6 +26,8 @@ public:
     void displayVertex(string id);
     bool findById(string id);
     void display();
+
+    pair<double,double> getPositionById(string id);
 };
 
 template<typename TV, typename TE>
@@ -34,10 +36,12 @@ DirectedGraph<TV, TE>::DirectedGraph() {
 }
 
 template<typename TV, typename TE>
-bool DirectedGraph<TV,TE>::insertVertex(string id, TV vertex){
+bool DirectedGraph<TV,TE>::insertVertex(string id, TV vertex, double lat, double lon){
     if (this->vertexes.count(id) == 0) {
-        Vertex<TV, TE>* v = new Vertex<TV,TE>(vertex,id);
+        Vertex<TV, TE>* v = new Vertex<TV,TE>(vertex,id, lat, lon);
         this->vertexes[id] = v;
+        this->vertexes[id]->latitude = lat;
+        this->vertexes[id]->longitude = lon;
         return true;
     }
     return false;
@@ -205,6 +209,16 @@ void DirectedGraph<TV,TE>::display() {
             cout << j->vertexes[1]->data << "[" << j->weight << "] ";
         }
         cout << endl;
+    }
+}
+
+template<typename TV, typename TE>
+pair<double,double> DirectedGraph<TV, TE>::getPositionById(string id){
+    if ( this->vertexes.find(id) == this->vertexes.end() ){
+        return make_pair(-100, -200);
+    }
+    else{
+        return make_pair(this->vertexes[id]->latitude, this->vertexes[id]->longitude);
     }
 }
 

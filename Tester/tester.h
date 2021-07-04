@@ -7,13 +7,13 @@
 
 #include "../Graph/DirectedGraph.h"
 #include "../Graph/UndirectedGraph.h"
-
+#include "../Parser/parser.h"
 using namespace std;
 struct Tester{
-    static void executeExamples();
-    static void executeParser();
+    //static void executeExamples();
+    static void executeParser(string path);
 };
-
+/*
 void Tester::executeExamples(){
     cout << "------------------------------------------------" << endl;
     cout << "|               Directed  Graph                |" << endl;
@@ -68,9 +68,35 @@ void Tester::executeExamples(){
 
     graph2.display(); cout << endl;
 }
+*/
+void Tester::executeParser(string path){
+    Parser parser;
+    parser.readJSON(path);
+    DirectedGraph<string, double> d1graph;
+    parser.dGraphMake(d1graph);
 
-void Tester::executeParser(){
+    cout<<"Probando Métodos:"<<endl;
+    // probando operador ()
+    auto A = d1graph("2808","2812");
+    cout<<"Operador (): "<<A<<endl;
 
+    // probando densidad
+    float D = d1graph.density();
+    cout<<"Densidad: "<<D<<endl;
+
+
+    // probando isDense, isConnected, empty
+    bool dense = d1graph.isDense();
+    if(dense) {cout << "Dense!" << endl;} else {cout << "No Dense!" << endl;}
+
+    bool connected = d1graph.isConnected();
+    if(connected) {cout << "Connected!" << endl;} else {cout << "No Connected!" << endl;}
+
+    bool stronglyConnected = d1graph.isStronglyConnected();
+    if(stronglyConnected) {cout << "Is Strongly Connected!" << endl;} else {cout << "No Connected!" << endl;}
+
+    bool empty = d1graph.empty();
+    if(empty) {cout << "Empty !" << endl;} else {cout << "No Empty!" << endl;}
 }
 
 #endif //PROYECTO_DE_CURSO_DIOSPLAN_TESTER_H

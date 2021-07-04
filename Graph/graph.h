@@ -34,10 +34,14 @@ template<typename TV, typename TE>
 struct Vertex {
     TV data;
     string id;
+    double latitude = 0;
+    double longitude = 0;
     std::list<Edge<TV, TE>*> edges;
-    Vertex(TV data, string id){
+    Vertex(TV data, string id, double latitude = 0, double longitude = 0){
         this->data = data;
         this->id = id;
+        this->latitude = latitude;
+        this->longitude = longitude;
     }
 };
 
@@ -48,7 +52,7 @@ protected:
     unsigned int edges;
     
 public:
-    virtual bool insertVertex(string id, TV vertex) = 0;
+    virtual bool insertVertex(string id, TV vertex, double lat = 0, double lon = 0) = 0;
     virtual bool createEdge(string id1, string id2, TE w) = 0;
     virtual bool deleteVertex(string id) = 0;
     virtual bool deleteEdge(string id1, string id2) = 0;
@@ -63,6 +67,8 @@ public:
     virtual void displayVertex(string id)= 0;
     virtual bool findById(string id) = 0;
     virtual void display() = 0;
+
+    virtual pair<double,double> getPositionById(string id)=0;
 };
 
 #endif

@@ -4,23 +4,37 @@
 #include "graph.h"
 
 template<typename TV, typename TE>
-class UnDirectedGraph : public Graph<TV, TE>{
+class UnDirectedGraph : public Graph<TV, TE> {
 public:
     UnDirectedGraph();
-    bool insertVertex(string id, TV vertex);
+
+    bool insertVertex(string id, TV vertex, double lat, double lon);
+
     bool createEdge(string id1, string id2, TE w);
+
     bool deleteVertex(string id);
+
     bool deleteEdge(string id1, string id2);
+
     TE operator()(string start, string end);
+
     float density();
+
     bool isDense(float threshold = 0.5);
+
     bool isConnected();
+
     bool empty();
+
     void clear();
 
     void displayVertex(string id);
+
     bool findById(string id);
+
     void display();
+
+    pair<double, double> getPositionById(string id);
 };
 
 template<typename TV, typename TE>
@@ -29,10 +43,12 @@ UnDirectedGraph<TV,TE>::UnDirectedGraph() {
 }
 
 template<typename TV, typename TE>
-bool UnDirectedGraph<TV, TE>::insertVertex(string id, TV vertex) {
+bool UnDirectedGraph<TV, TE>::insertVertex(string id, TV vertex, double lat, double lon) {
     if(!findById(id)) {
-        Vertex<TV, TE> *v = new Vertex<TV, TE>(vertex, id);
+        Vertex<TV, TE>* v = new Vertex<TV,TE>(vertex,id, lat, lon);
         this->vertexes[id] = v;
+        this->vertexes[id]->latitude = lat;
+        this->vertexes[id]->longitude = lon;
         return true;
     }
     return false;
@@ -175,6 +191,16 @@ void UnDirectedGraph<TV, TE>::display() {
             cout << j->vertexes[1]->data << "[" << j->weight << "] ";
         }
         cout << endl;
+    }
+}
+
+template<typename TV, typename TE>
+pair<double,double> UnDirectedGraph<TV, TE>::getPositionById(string id){
+    if ( this->vertexes.find(id) == this->vertexes.end() ){
+        return make_pair(-100, -200);
+    }
+    else{
+        return make_pair(this->vertexes[id]->latitude, this->vertexes[id]->longitude);
     }
 }
 
