@@ -6,10 +6,17 @@
 #define PROYECTO_DE_CURSO_DIOSPLAN_TESTER_H
 
 #include "../Graph/DirectedGraph.h"
-#include "../Graph/Algorithms/dijkstra.h"
 #include "../Graph/UndirectedGraph.h"
+#include "../Graph/Algorithms/dijkstra.h"
+#include "../Graph/Algorithms/astar.h"
+#include "../Graph/Algorithms/dfs.h"
+#include "../Graph/Algorithms/bfs.h"
+#include "../Graph/Algorithms/kruskal.h"
+#include "../Graph/Algorithms/prim.h"
 #include "../Parser/parser.h"
+
 using namespace std;
+
 struct Tester{
     //static void executeExamples();
     static void executeParser(string path);
@@ -99,12 +106,30 @@ void Tester::executeParser(string path){
     bool empty = d1graph.empty();
     if(empty) {cout << "Empty !" << endl;} else {cout << "No Empty!" << endl;}
 
+    UnDirectedGraph<string, double> u2graph;
+    cout << "------------------------------------------------" << endl;
+    cout << "|               Tests Algorithms               |" << endl;
+    cout << "------------------------------------------------" << endl;
+/*
+    cout<<"\nDFS:\n";
+    DFS<string, double> dfs(&u2graph, "2662");
+    auto m = dfs.apply();
+    //m.display();
+
+    cout<<"\nBFS:\n";
+    BFS<string, double> bfs(&u2graph);
+    auto g=bfs.apply("2662");
+    //g.display();
+*/
 
     cout<<"\nDijkstra:\n";
-    UnDirectedGraph<string, double> u2graph;
     parser.uGraphMake(u2graph);
     Dijkstra<string, double> Djks(&u2graph, "2796");
     Djks.apply();
+
+    cout << "\nA Asterisk ( A* ): \n";
+    Astar<string, double> a(&u2graph, "2812","2807");
+    a.print();
 }
 
 #endif //PROYECTO_DE_CURSO_DIOSPLAN_TESTER_H

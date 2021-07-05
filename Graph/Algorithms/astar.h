@@ -58,7 +58,7 @@ vector<string> Astar<TV, TE>::apply() {
     //calculate heuristic of distances from every node to destiny
     for (auto i : graph->vertexes) {
         Vertex<TV, TE>* srcVertex = i.second;
-        h[i.first] = distance(srcVertex->latitud, srcVertex->longitud, destVertex->latitud, destVertex->longitud);
+        h[i.first] = distance(srcVertex->latitude, srcVertex->longitude, destVertex->latitude, destVertex->longitude);
     }
 
     priority_queue<pair<p, TE>, vector<pair<p, TE>>, comp<TE>> open; //nodes to visit
@@ -78,7 +78,7 @@ vector<string> Astar<TV, TE>::apply() {
         //push adjacent nodes to prority queue
         for (auto i : v->edges) {
             //if node is not visited, add to open priorityqueue
-            string id = i->vertexes[1]->key;
+            string id = i->vertexes[1]->id;
             if (!(find(visited.begin(), visited.end(), id) != visited.end())) {
                 open.push(make_pair(make_pair(id, i->weight + top.first.second), i->weight + top.first.second + h[id]));
             }

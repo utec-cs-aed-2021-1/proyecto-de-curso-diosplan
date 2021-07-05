@@ -7,7 +7,7 @@ struct BFS
 {
     UnDirectedGraph<TV, TE> *grafo;
     BFS(UnDirectedGraph<TV, TE> *grafo_);
-    UnDirectedGraph<TV, TE> aplicar(string source);
+    UnDirectedGraph<TV, TE> apply(string source);
 };
 
 template<typename TV, typename TE>
@@ -17,7 +17,7 @@ BFS<TV, TE>::BFS(UnDirectedGraph<TV, TE> *grafo_)
 }
 
 template<typename TV, typename TE>
-UnDirectedGraph<TV, TE> BFS<TV, TE>::aplicar(string source) {
+UnDirectedGraph<TV, TE> BFS<TV, TE>::apply(string source) {
     UnDirectedGraph<TV, TE> result;
     std::queue<Vertex<TV, TE>*> Q;
     std::unordered_map<TV, std::pair<bool, string>> visitados;
@@ -25,12 +25,12 @@ UnDirectedGraph<TV, TE> BFS<TV, TE>::aplicar(string source) {
     {
         visitados[i.second->data].first = false;
         visitados[i.second->data].second = i.first;
-        result.insertVertex(i.first, i.second->data);
+        result.insertVertex2(i.first, i.second->data);
     }
     visitados[this->grafo->vertexes.begin()->second->data].first = true;
     if (this->grafo->findById(source))
     {
-        Q.push(this->graph->vertexes[source]);
+        Q.push(this->grafo->vertexes[source]);
     }
     while (!Q.empty())
     {
