@@ -27,7 +27,7 @@ UnDirectedGraph<TV, TE> Kruskal<TV, TE>::apply() {
     UnDirectedGraph<TV, TE> g;                                                              // Grafo para retornar
 
     for (auto it1 : graph->vertexes) {
-        g.insertVertex(it1.first , (it1.second)->data);
+        g.insertVertex2(it1.first , (it1.second)->data);
         visited[it1.second->data].second = it1.first;
         for (auto it2 : (it1.second)->edges) {
             if (visited[it1.second->data].first.count(it2->vertexes[1]->data) == 0 && visited[it2->vertexes[1]->data].first.count(it1.second->data) == 0) {

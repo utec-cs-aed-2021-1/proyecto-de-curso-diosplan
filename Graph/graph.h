@@ -5,6 +5,9 @@
 #include <vector>
 #include <unordered_map>
 #include <string>
+#include <map>
+
+std::map<>
 
 using namespace std;
 
@@ -64,6 +67,9 @@ template<typename TV, typename TE>
 struct Prim;
 
 template<typename TV, typename TE>
+struct Floyd;
+
+template<typename TV, typename TE>
 class Graph{
 protected:
     std::unordered_map<string, Vertex<TV, TE>*>  vertexes;
@@ -75,6 +81,7 @@ protected:
     friend struct BFS<TV, TE>;
     friend struct Kruskal<TV, TE>;
     friend struct Prim<TV, TE>;
+    friend struct Floyd<TV, TE>;
 
 public:
     virtual bool insertVertex(string id, TV vertex, double lat = 0, double lon = 0) = 0;

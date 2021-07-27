@@ -13,6 +13,7 @@
 #include "../Graph/Algorithms/bfs.h"
 #include "../Graph/Algorithms/kruskal.h"
 #include "../Graph/Algorithms/prim.h"
+#include "../Graph/Algorithms/floyd.h"
 #include "../Parser/parser.h"
 
 using namespace std;
@@ -78,7 +79,7 @@ void Tester::executeExamples(){
 }
 */
 void Tester::executeParser(string path){
-    Parser parser;
+    Parser parser, parser2, parser3;
     parser.readJSON(path);
     DirectedGraph<string, double> d1graph;
     parser.dGraphMake(d1graph);
@@ -106,30 +107,65 @@ void Tester::executeParser(string path){
     bool empty = d1graph.empty();
     if(empty) {cout << "Empty !" << endl;} else {cout << "No Empty!" << endl;}
 
-    UnDirectedGraph<string, double> u2graph;
+
+    parser2.readJSON(path);
+    UnDirectedGraph<string, double> u1graph;
+    parser.uGraphMake(u1graph);
+
+
     cout << "------------------------------------------------" << endl;
     cout << "|               Tests Algorithms               |" << endl;
     cout << "------------------------------------------------" << endl;
-/*
-    cout<<"\nDFS:\n";
-    DFS<string, double> dfs(&u2graph, "2662");
-    auto m = dfs.apply();
-    //m.display();
 
-    cout<<"\nBFS:\n";
-    BFS<string, double> bfs(&u2graph);
-    auto g=bfs.apply("2662");
-    //g.display();
-*/
+//    cout<<"\nDFS:\n";
+//    DFS<string, double> dfs(&u1graph, "2796");
+//    auto m = dfs.apply();
+//    m.display();
 
-    cout<<"\nDijkstra:\n";
-    parser.uGraphMake(u2graph);
-    Dijkstra<string, double> Djks(&u2graph, "2796");
-    Djks.apply();
+//    cout<<"\nBFS:\n";
+//    BFS<string, double> bfs(&u1graph);
+//    auto g=bfs.apply("2796");
+//    g.display();
 
-    cout << "\nA Asterisk ( A* ): \n";
-    Astar<string, double> a(&u2graph, "2812","2807");
-    a.print();
+//    cout<<"\nDijkstra:\n";
+//    parser.uGraphMake(u2graph);
+//    Dijkstra<string, double> Djks(&u2graph, "2796");
+//    Djks.apply();
+//
+//    cout << "\nA Asterisk ( A* ): \n";
+//    Astar<string, double> a(&u2graph, "2812","2807");
+//    a.print();
+
+//    cout<<"Probando Kruskal: "<<endl;
+//    UnDirectedGraph<string, double> u1graph2;
+//    parser3.readJSON(path);
+//
+//    parser3.uGraphMake(u1graph2);
+//
+//    Kruskal<string, double> kruskal(&u1graph2);
+//    UnDirectedGraph<string, double> result3 = kruskal.apply();
+//
+//    cout<<endl;
+//    result3.display();
+
+
+//    cout << endl <<"Probando Prim" << endl;
+//    Prim<string, double> prim(&u1graph, "2796");
+//    UnDirectedGraph<string, double> result4 = prim.apply();
+//    cout<<endl;
+//    result4.display();
+
+    cout << "FLOYD TESTS: \n";
+    Floyd<string, double> floyd(&u1graph);
+//    floyd.print(); //imprime la matriz de adyacencia
+u1graph.display();
+cout<<"Distancia entre 2812 y 2807: "<<floyd.distance("2812","2807");
+    cout<<endl;
+    cout<<"PATH:   ";
+    floyd.showpath("2812","2807");
+    cout<<endl;
+
+
 }
 
 #endif //PROYECTO_DE_CURSO_DIOSPLAN_TESTER_H

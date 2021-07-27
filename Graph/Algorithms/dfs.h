@@ -6,19 +6,11 @@ template<typename TV, typename TE>
 struct DFS {
     string src;
     UnDirectedGraph<TV, TE> *graph;
+    UnDirectedGraph<TV, TE> gdfs;
+    std::unordered_map<string, bool> v;
     DFS(UnDirectedGraph<TV, TE> *graph, string _src_);
     UnDirectedGraph<TV, TE> apply();
-};
-
-
-template <typename TV, typename TE>
-using EPair = pair<Edge<TV, TE>*, Vertex<TV, TE>*>;
-
-template<typename TV, typename TE>
-struct compPairs2{
-    bool operator()(const EPair<TV, TE> p1, const EPair<TV, TE> p2) const {
-        return p1.first->weight > p2.first->weight;
-    }
+    void apply2(string id);
 };
 
 template<typename TV, typename TE>
@@ -29,42 +21,30 @@ DFS<TV, TE>::DFS(UnDirectedGraph<TV, TE> *_graph_, string _src_) {
 
 template<typename TV, typename TE>
 UnDirectedGraph<TV, TE> DFS<TV, TE>::apply() {
-    UnDirectedGraph<TV, TE> g;
     int s = graph->vertexes.size();
-    std::stack<EPair<TV, TE>> S;
-    std::unordered_map<TV, std::pair<bool, string>> visited;
+    gdfs.clear();
     for (auto x : graph->vertexes) {
-        visited[x.second->id].first = false;          // Visitados
-        visited[x.second->id].second = x.first;       // id
-        g.insertVertex(x.first , (x.second)->data, x.second->latitude, x.second->latitude);     // Rellenar los vértices
+        v[x.second->id] = false; // Visitados
+//        visited[x.first] = false; // Visitados
+        gdfs.insertVertex(x.first , (x.second)->data, x.second->latitude, x.second->latitude);// Rellenar los vértices
     }
+    apply2(src);
+    return gdfs;
+}
 
-    visited[graph->vertexes[src]->id].first = true;
-    S.push(make_pair(nullptr, graph->vertexes[src]));
 
-    while(!S.empty()) {
-        Vertex<TV, TE>* v = S.top().second;
-        S.pop();
-        priority_queue<EPair<TV, TE>, std::vector<EPair<TV, TE>>, compPairs2<TV, TE>> pq;
-        for (auto unions : v->edges) {
-            pq.push(make_pair(unions, unions->vertexes[1]));
-        }
+template<typename TV, typename TE>
+void DFS<TV, TE>::apply2( string id) {
+    v[id] = true;
+    //recorro los hijos
+    for (auto e : graph->vertexes[id]->edges){
+        //nodo inicial, nodo final, peso
+        //cout << e->vertexes[0]->id <<"  "<<e->vertexes[1]->id <<"  "<<e->weight << endl;
+        //si un hijo no está visitado, le hago dfs al hijo
+        if(!v[e->vertexes[1]->id]){
+            gdfs.createEdge(e->vertexes[0]->id,e->vertexes[1]->id, e->weight);
+            apply2(e->vertexes[1]->id);
 
-        while ( !pq.empty() ) {
-            if (!visited[pq.top().second->id].first) {
-                S.push(pq.top());
-            }
-            pq.pop();
-        }
-
-        if ( !S.empty() ) {
-            EPair<TV, TE> u = S.top();
-            if (!visited[u.first->vertexes[1]->id].first) {
-                g.createEdge(u.first->vertexes[0]->id, u.first->vertexes[1]->id, u.first->weight);
-                visited[u.first->vertexes[0]->id].first = true;
-                visited[u.first->vertexes[1]->id].first = true;
-            }
         }
     }
-    return g;
 }

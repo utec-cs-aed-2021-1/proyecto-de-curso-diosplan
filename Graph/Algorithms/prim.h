@@ -1,17 +1,16 @@
 #include "../UndirectedGraph.h"
 
-template<typename TE>
-bool compWeightP(pair<string, TE> p1, pair<string, TE> p2) {
-    TE temp1 = p1.second;
-    TE temp2 = p2.second;
-    if (temp1 == -1) {
-        temp1 = temp2 + 1;
+template <typename TV, typename TE>
+using EPair = pair<Edge<TV, TE>*, Vertex<TV, TE>*>;
+
+template<typename TV, typename TE>
+struct compPairs2{
+    bool operator()(const EPair<TV, TE> p1, const EPair<TV, TE> p2) const {
+        return p1.first->weight > p2.first->weight;
     }
-    else if (temp2 == -1) {
-        temp2 = temp1 + 1;
-    }
-    return temp1 > temp2;
-}
+};
+
+
 
 template<typename TV, typename TE>
 struct Prim {
@@ -32,16 +31,16 @@ Prim<TV, TE>::Prim(UnDirectedGraph<TV, TE> *graph, const string& start) {
 template<typename TV, typename TE>
 UnDirectedGraph<TV, TE> Prim<TV, TE>::apply() {
     UnDirectedGraph<TV, TE> g;
-    priority_queue<pair<TV, TE>, std::vector<pair<TV, TE>>, compPairs<TV, TE>> pq;
+    priority_queue<EPair<TV, TE>, std::vector<EPair<TV, TE>>, compPairs2<TV, TE>> pq;
     unordered_map<TV, unordered_map<TV, bool>> visited;
 
 
-    g.insertVertex(graph->vertexes[start]->key, graph->vertexes[start]->data, graph->vertexes[start]->latitud, graph->vertexes[start]->longitud);
+    g.insertVertex(graph->vertexes[start]->id, graph->vertexes[start]->data, graph->vertexes[start]->latitude, graph->vertexes[start]->longitude);
     pq.push(make_pair(nullptr, graph->vertexes[start]));
 
     for (auto x : graph->vertexes) {
         for (auto y : x.second->edges) {
-            if (y->vertexes[1]->key == graph->vertexes[start]->key)
+            if (y->vertexes[1]->id == graph->vertexes[start]->id)
                 visited[y->vertexes[1]->data][graph->vertexes[start]->data] = true;
         }
     }
@@ -58,10 +57,10 @@ UnDirectedGraph<TV, TE> Prim<TV, TE>::apply() {
             }
         }
 
-        if (!pq.empty() && !g.areConnected(pq.top().first->vertexes[0]->key, pq.top().first->vertexes[1]->key)) {
+        if (!pq.empty() && !g.areConnected(pq.top().first->vertexes[0]->id, pq.top().first->vertexes[1]->id)) {
             auto v = pq.top();
-            g.insertVertex(v.second->key, v.second->data, v.second->latitud, v.second->longitud);
-            g.createEdge(v.first->vertexes[0]->key, v.first->vertexes[1]->key, v.first->weight);
+            g.insertVertex(v.second->id, v.second->data, v.second->latitude, v.second->longitude);
+            g.createEdge(v.first->vertexes[0]->id, v.first->vertexes[1]->id, v.first->weight);
         }
     }
 

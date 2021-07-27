@@ -37,6 +37,8 @@ public:
     void display();
 
     pair<double, double> getPositionById(string id);
+
+    bool areConnected(string id1, string id2);
 };
 
 template<typename TV, typename TE>
@@ -198,9 +200,11 @@ bool UnDirectedGraph<TV, TE>::findById(string id) {
 template<typename TV, typename TE>
 void UnDirectedGraph<TV, TE>::display() {
     for (auto i : this->vertexes) {
-        cout << i.second->data << " :: ";
+//        cout << i.second->data << " :: ";
+        cout << i.second->id << " :: ";
         for (auto j : i.second->edges) {
-            cout << j->vertexes[1]->data << "[" << j->weight << "] ";
+//            cout << j->vertexes[1]->data << "[" << j->weight << "] ";
+            cout << j->vertexes[1]->id << "[" << j->weight << "] ";
         }
         cout << endl;
     }
@@ -214,6 +218,37 @@ pair<double,double> UnDirectedGraph<TV, TE>::getPositionById(string id){
     else{
         return make_pair(this->vertexes[id]->latitude, this->vertexes[id]->longitude);
     }
+}
+
+template <typename TV, typename TE>
+bool UnDirectedGraph<TV, TE>::areConnected(string id1, string id2) {
+    if (this->edges == 0 || this->vertexes.count(id1)==0 || this->vertexes.count(id2)==0)
+        return false;
+
+    auto temp = this->vertexes[id2]->data;
+    std::queue<Vertex<TV, TE>*> q;
+    std::unordered_map<TV, bool> visited;
+    for (auto it : this->vertexes)
+        visited[(it.second)->data] = false;
+
+    visited[this->vertexes[id1]->data] = true;
+    q.push(this->vertexes[id1]);
+    auto u = q.front();
+    q.push(u);
+    while (!q.empty()) {
+        u = q.front();
+        q.pop();
+        for (auto it : u->edges) {
+            if ((it->vertexes)[1]->data == temp)
+                return true;
+            if (visited[(it->vertexes)[1]->data] == false) {
+                q.push((it->vertexes)[1]);
+                visited[(it->vertexes)[1]->data] = true;
+            }
+        }
+    }
+
+    return false;
 }
 
 #endif
