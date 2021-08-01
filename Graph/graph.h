@@ -67,6 +67,12 @@ template<typename TV, typename TE>
 struct Floyd;
 
 template<typename TV, typename TE>
+struct BF;
+
+template<typename TV, typename TE>
+struct BBFS;
+
+template<typename TV, typename TE>
 class Graph{
 protected:
     std::unordered_map<string, Vertex<TV, TE>*>  vertexes;
@@ -79,6 +85,8 @@ protected:
     friend struct Kruskal<TV, TE>;
     friend struct Prim<TV, TE>;
     friend struct Floyd<TV, TE>;
+    friend struct BF<TV, TE>;
+    friend struct BBFS<TV, TE>;
 
 public:
     virtual bool insertVertex(string id, TV vertex, double lat = 0, double lon = 0) = 0;

@@ -14,6 +14,8 @@
 #include "../Graph/Algorithms/kruskal.h"
 #include "../Graph/Algorithms/prim.h"
 #include "../Graph/Algorithms/floyd.h"
+#include "../Graph/Algorithms/bellman.h"
+#include "../Graph/Algorithms/bbfs.h"
 #include "../Parser/parser.h"
 
 using namespace std;
