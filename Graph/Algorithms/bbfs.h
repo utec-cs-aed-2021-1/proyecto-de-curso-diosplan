@@ -67,7 +67,6 @@ void BBFS<TV, TE>::apply(string source, string target) {
         t = m[t];
     }
     for(int i=rev.size()-1; i>=0;i--){
-//        cout << rev[i];
         // cambiar por data o id, acorde qué se quiera mostrar.
         cout << this->grafo->vertexes[rev[i]]->data;
         if(i) cout<<" -> ";

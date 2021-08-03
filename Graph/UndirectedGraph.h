@@ -171,7 +171,7 @@ bool UnDirectedGraph<TV, TE>::isConnected() {
 }
 template<typename TV, typename TE>
 bool UnDirectedGraph<TV, TE>::empty() {
-    return this->vertexes.size() != 0;
+    return this->vertexes.size() == 0;
 }
 
 template<typename TV, typename TE>

@@ -12,6 +12,7 @@ class DirectedGraph : public Graph<TV, TE>{
 public:
     DirectedGraph();
     bool insertVertex(string id, TV vertex, double lat, double lon);
+    bool insertVertex2(string id, TV vertex);
     bool createEdge(string id1, string id2, TE w);
     bool deleteVertex(string id);
     bool deleteEdge(string id1, string id2);
@@ -42,6 +43,16 @@ bool DirectedGraph<TV,TE>::insertVertex(string id, TV vertex, double lat, double
         this->vertexes[id] = v;
         this->vertexes[id]->latitude = lat;
         this->vertexes[id]->longitude = lon;
+        return true;
+    }
+    return false;
+}
+
+template<typename TV, typename TE>
+bool DirectedGraph<TV,TE>::insertVertex2(string id, TV vertex){
+    if (this->vertexes.count(id) == 0) {
+        Vertex<TV, TE>* v = new Vertex<TV,TE>(vertex,id);
+        this->vertexes[id] = v;
         return true;
     }
     return false;

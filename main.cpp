@@ -10,8 +10,9 @@ int main(int argc, char *argv[]) {
     std::cout << "||             MENU GRAPH TESTER              ||" << std::endl;
     std::cout << "================================================" << std::endl;
     
-//    Tester::executeExamples();
-    Tester::executeParser("Parser/Data/pe.json");
-    
+    Tester::executeExamples();
+//    Tester::executeParserPeru("Parser/Data/pe.json");
+//    Tester::executeParserMundo("Parser/Data/airports.json");
+
     return EXIT_SUCCESS;
 }
