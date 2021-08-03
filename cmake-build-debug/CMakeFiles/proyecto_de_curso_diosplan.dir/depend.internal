@@ -3,6 +3,8 @@
 
 CMakeFiles/proyecto_de_curso_diosplan.dir/main.cpp.o
  /home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/Algorithms/astar.h
+ /home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/Algorithms/bbfs.h
+ /home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/Algorithms/bellman.h
  /home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/Algorithms/bfs.h
  /home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/Algorithms/dfs.h
  /home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/Algorithms/dijkstra.h

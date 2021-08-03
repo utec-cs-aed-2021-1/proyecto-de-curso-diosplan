@@ -129,6 +129,11 @@ void Tester::executeParser(string path){
 //    auto g=bfs.apply("2796");
 //    g.display();
 
+    cout<<"\nBBFS:\n";
+    BBFS<string, double> bbfs(&u1graph);
+    bbfs.apply("2812","2807");
+//    g.display();
+
 //    cout<<"\nDijkstra:\n";
 //    parser.uGraphMake(u2graph);
 //    Dijkstra<string, double> Djks(&u2graph, "2796");
@@ -160,7 +165,7 @@ void Tester::executeParser(string path){
     cout << "FLOYD TESTS: \n";
     Floyd<string, double> floyd(&u1graph);
 //    floyd.print(); //imprime la matriz de adyacencia
-u1graph.display();
+//u1graph.display();
 cout<<"Distancia entre 2812 y 2807: "<<floyd.distance("2812","2807");
     cout<<endl;
     cout<<"PATH:   ";

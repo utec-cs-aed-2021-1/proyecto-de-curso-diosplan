@@ -16,6 +16,18 @@ cmath
 algorithm
 -
 
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/Algorithms/bbfs.h
+../UndirectedGraph.h
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/UndirectedGraph.h
+
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/Algorithms/bellman.h
+../UndirectedGraph.h
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/UndirectedGraph.h
+../DirectedGraph.h
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/DirectedGraph.h
+limits
+-
+
 /home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/Algorithms/bfs.h
 ../UndirectedGraph.h
 /home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/UndirectedGraph.h
@@ -103,6 +115,10 @@ math.h
 /home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/Algorithms/prim.h
 ../Graph/Algorithms/floyd.h
 /home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/Algorithms/floyd.h
+../Graph/Algorithms/bellman.h
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/Algorithms/bellman.h
+../Graph/Algorithms/bbfs.h
+/home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Graph/Algorithms/bbfs.h
 ../Parser/parser.h
 /home/jlr/Desktop/CICLO5/AED/tareas/proyecto-de-curso-diosplan/Parser/parser.h
 
