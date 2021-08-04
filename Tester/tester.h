@@ -16,6 +16,7 @@
 #include "../Graph/Algorithms/floyd.h"
 #include "../Graph/Algorithms/bellman.h"
 #include "../Graph/Algorithms/bbfs.h"
+#include "../Graph/Algorithms/scc.h"
 #include "../Parser/parser.h"
 
 using namespace std;
@@ -279,7 +280,6 @@ void Tester::executeParserPeru(string path){
     cout << " -----------> FLOYD TESTS: \n";
     Floyd<string, double> floyd(&u1graph);
 //    floyd.print(); //imprime la matriz de adyacencia
-//u1graph.display();
     cout<<"Distancia entre 2812 y 2807: "<<floyd.distance("2812","2807");
     cout<<endl;
     cout<<"PATH:   ";
@@ -447,7 +447,6 @@ void Tester::executeParserMundo(string path){
     cout << " -----------> FLOYD TESTS: \n";
     Floyd<string, double> floyd(&u1graph);
 //    floyd.print(); //imprime la matriz de adyacencia
-//u1graph.display();
     cout<<"Distancia entre 2812 y 2807: "<<floyd.distance("2812","2807");
     cout<<endl;
     cout<<"PATH:   ";

@@ -23,8 +23,8 @@ Kruskal<TV, TE>::Kruskal(UnDirectedGraph<TV, TE> *_graph_) {
 template<typename TV, typename TE>
 UnDirectedGraph<TV, TE> Kruskal<TV, TE>::apply() {
     std::priority_queue<Edge<TV, TE>*, std::vector<Edge<TV, TE>*>, compWeight<TV, TE>> pq;
-    std::unordered_map<TV, std::pair<std::unordered_map<TV, int>, string>> visited;      // Para evitar que las aristas se marquen doble (A<->B == B<->A)
-    UnDirectedGraph<TV, TE> g;                                                              // Grafo para retornar
+    std::unordered_map<TV, std::pair<std::unordered_map<TV, int>, string>> visited;  // Para evitar que las aristas se marquen doble (A<->B == B<->A)
+    UnDirectedGraph<TV, TE> g;      // Grafo para retornar
 
     for (auto it1 : graph->vertexes) {
         g.insertVertex2(it1.first , (it1.second)->data);

@@ -200,10 +200,8 @@ bool UnDirectedGraph<TV, TE>::findById(string id) {
 template<typename TV, typename TE>
 void UnDirectedGraph<TV, TE>::display() {
     for (auto i : this->vertexes) {
-//        cout << i.second->data << " :: ";
         cout << i.second->id << " :: ";
         for (auto j : i.second->edges) {
-//            cout << j->vertexes[1]->data << "[" << j->weight << "] ";
             cout << j->vertexes[1]->id << "[" << j->weight << "] ";
         }
         cout << endl;

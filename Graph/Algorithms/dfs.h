@@ -24,8 +24,7 @@ UnDirectedGraph<TV, TE> DFS<TV, TE>::apply() {
     int s = graph->vertexes.size();
     gdfs.clear();
     for (auto x : graph->vertexes) {
-        v[x.second->id] = false; // Visitados
-//        visited[x.first] = false; // Visitados
+        v[x.second->id] = false; // Visitados, también se podría usar visited[x.first] = false;
         gdfs.insertVertex(x.first , (x.second)->data, x.second->latitude, x.second->latitude);// Rellenar los vértices
     }
     apply2(src);
@@ -39,7 +38,6 @@ void DFS<TV, TE>::apply2( string id) {
     //recorro los hijos
     for (auto e : graph->vertexes[id]->edges){
         //nodo inicial, nodo final, peso
-        //cout << e->vertexes[0]->id <<"  "<<e->vertexes[1]->id <<"  "<<e->weight << endl;
         //si un hijo no está visitado, le hago dfs al hijo
         if(!v[e->vertexes[1]->id]){
             gdfs.createEdge(e->vertexes[0]->id,e->vertexes[1]->id, e->weight);

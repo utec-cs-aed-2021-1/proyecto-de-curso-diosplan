@@ -31,7 +31,6 @@ Floyd<TV, TE>::Floyd(UnDirectedGraph<TV, TE> *graph){
     for(auto v : graph->vertexes){
         this->indexes[v.first] = pos;
         this->invIndexes[pos] = v.first;
-        //indexes[id] = pos
         pos++;
     }
     // inicializar size e infs

@@ -8,7 +8,6 @@
 #include "../UndirectedGraph.h"
 #include "map"
 
-//template <typename TV, typename TE>
 using PQNode = pair<double, pair<string, string>>;  // current weight <nodo src, nodo father>.
 
 struct compPQNodes{
@@ -20,7 +19,7 @@ struct compPQNodes{
 template<typename TV, typename TE>
 struct BBFS{
     UnDirectedGraph<TV,TE>* grafo;
-    BBFS(UnDirectedGraph<TV,TE>* graph);//, const string& start);
+    BBFS(UnDirectedGraph<TV,TE>* graph);
     void apply(string source, string target);
 };
 
@@ -48,14 +47,12 @@ void BBFS<TV, TE>::apply(string source, string target) {
         auto weight = temp.first;
         auto current = temp.second.first;
         auto dad = temp.second.second;
-//        cout << current <<" " <<weight<< endl;
         m[current] = dad;
         Q.pop();
         if (current == target) break;
         for (auto j : this->grafo->vertexes[current]->edges){
             if (visitados[j->vertexes[1]->id] == false){
                 Q.push(make_pair(weight+j->weight, make_pair(j->vertexes[1]->id, current))); //curent = j->vertexes[0]
-//                cout <<"\t"<< j->vertexes[1]->id <<" " <<weight+j->weight<< endl;
                 visitados[j->vertexes[1]->id] = true;
             }
         }

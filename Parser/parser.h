@@ -24,7 +24,6 @@ struct Parser{
 
     void readJSON(string path); // Parses JSON file and saves data into class
     // NOTE: each derived class has its own readJSON method
-
     void uGraphMake(UnDirectedGraph<string, double> &tempGraph); // Adds the parsed data into the specified undirected graph
 
     void dGraphMake(DirectedGraph<string, double> &tempGraph); // Adds the parsed data into the specified directed graph
@@ -33,6 +32,7 @@ struct Parser{
 
     double getDistance(pair<double, double> posX, pair<double, double> posY);
 };
+
 
 void Parser::clear(){
     delete this;
@@ -77,7 +77,8 @@ void Parser::uGraphMake(UnDirectedGraph<string, double> &tempGraph){
             if(tempGraph.findById(yID)) {//si no encontraba un destino, devolvía (0,0) lo que generaba error con la heurística
                 pair<double, double> posY = tempGraph.getPositionById(yID); //par de latitud y longitud de yID
                 double weight = getDistance(posX, posY);
-                tempGraph.createEdge(xID, yID, weight);  //si fuese undirected, tendría que insertar también yID, xID
+                tempGraph.createEdge(xID, yID, weight);
+                tempGraph.createEdge(yID, xID, weight);
             }
         }
     }
@@ -112,6 +113,7 @@ void Parser::dGraphMake(DirectedGraph<string, double> &tempGraph){
 double degToRad(double deg){
     return deg * (M_PI/180);
 }
+
 //distancia entre dos puntos, usando latitud y longitud (posX[latitud,longitud]) en KMs
 //enlace: https://en.wikipedia.org/wiki/Haversine_formula
 double Parser::getDistance(pair<double, double> posX, pair<double, double> posY){
@@ -125,7 +127,5 @@ double Parser::getDistance(pair<double, double> posX, pair<double, double> posY)
     double dist = R * c; //Distancia en KMs
     return dist;
 }
-
-
 
 #endif //PROYECTO_DE_CURSO_DIOSPLAN_PARSER_H
